@@ -46,5 +46,5 @@ document.querySelector("#inquiry-form")?.addEventListener("submit", e => {
     `Hello Anna,\\n\\nI'd like to inquire about your services.\\n\\nName: ${data.get("name")}\\nEmail: ${data.get("email")}\\nService: ${data.get("service")}\\n\\nProject details:\\n${data.get("message")}\\n\\nThank you.`
   );
   // Replace anna@example.com with the email address you want clients to use.
-  window.location.href = `mailto:anna@example.com?subject=${subject}&body=${body}`;
+ window.location.href = `mailto:anna.jatsiv@gmail.com?subject=${subject}&body=${body}`;
 });
