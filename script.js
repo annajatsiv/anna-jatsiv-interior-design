@@ -1,20 +1,24 @@
-// Site image assignment is generated from assets in this package.
-// You can replace any asset filename in the map below with a higher-resolution original.
+// Image descriptions help screen-reader users and give search engines context.
 const imageMap = {
-  hero: "pdf-p6-img1.png",
-  about: "pdf-p2-img1.png",
-  office: "pdf-p4-img1.png",
-  living: "pdf-p6-img1.png",
-  primary: "pdf-p8-img1.png",
-  bedroom: "pdf-p10-img1.png",
-  nursery: "pdf-p12-img1.png"
+  hero: "contemporary-luxe-living-room.png",
+  about: "anna-jatsiv-interior-designer-about.png",
+  office: "modern-organic-home-office.png",
+  living: "contemporary-luxe-living-room.png",
+  primary: "contemporary-primary-bedroom.png",
+  bedroom: "modern-transitional-bedroom.png",
+  nursery: "modern-organic-nursery.png"
 };
 document.querySelectorAll(".image-slot").forEach(el => {
   const key = el.dataset.image;
   const file = imageMap[key];
   if (file) {
-    const url = `assets/${file}`;
-    el.style.backgroundImage = `url("${url}")`;
+    const img = document.createElement("img");
+    img.src = `assets/${file}`;
+    img.alt = el.dataset.alt || "Interior design portfolio image";
+    img.loading = key === "hero" ? "eager" : "lazy";
+    img.decoding = "async";
+    if (key === "hero") img.fetchPriority = "high";
+    el.prepend(img);
     el.classList.add("has-image");
   }
 });
@@ -43,8 +47,7 @@ document.querySelector("#inquiry-form")?.addEventListener("submit", e => {
   const data = new FormData(e.currentTarget);
   const subject = encodeURIComponent(`Interior design inquiry — ${data.get("service")}`);
   const body = encodeURIComponent(
-    `Hello Anna,\\n\\nI'd like to inquire about your services.\\n\\nName: ${data.get("name")}\\nEmail: ${data.get("email")}\\nService: ${data.get("service")}\\n\\nProject details:\\n${data.get("message")}\\n\\nThank you.`
+    `Hello Anna,\n\nI'd like to inquire about your services.\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nService: ${data.get("service")}\n\nProject details:\n${data.get("message")}\n\nThank you.`
   );
-  // Replace anna@example.com with the email address you want clients to use.
- window.location.href = `mailto:anna.jatsiv@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:anna.jatsiv@gmail.com?subject=${subject}&body=${body}`;
 });
